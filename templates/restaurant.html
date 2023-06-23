@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐厅列表</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/css/restaurants.css">
+</head>
+<body>
+<div class="col-md-3 col-xs-3" style="height: 1000px">
+    <div class="col-md-11 navigation col-lg-offset-1">
+        <div class="nav-head">
+            <span class="web-title"><h2>餐厅订餐</h2></span>
+        </div>
+        <div class="nav-content">
+            <ul class="nav nav-pills nav-stacked navigation-a">
+                <li><a href="../index/" id="index-a"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                <li><a href="../restaurant/" id="restaurant-a"><span class="glyphicon glyphicon-shopping-cart"></span>
+                    餐厅</a></li>
+                <li><a href="../order/" id="order-a"><span class="glyphicon glyphicon-tasks"></span> 我的订单</a></li>
+                <li><a href="../changeInfo/" id="user-a"><span class="glyphicon glyphicon-user"></span> 个人信息</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-md-9 col-xs-9" style="height: 1000px">
+    <div class="col-md-12 col-md-offset-0 index-content" style="margin-top: 10%; height: auto;">
+        {% if canteen_list %}
+            {% for canteen in canteen_list %}
+                <div class="col-md-4 res-cover">
+                    <div class="thumbnail">
+                        <img src="/media/{{ canteen.logoURL }}" alt="" class="img1">
+                        <span class="glyphicon glyphicon-bookmark"></span> {{ canteen.canteenName }}
+                        <button class="btn btn-warning">
+                            <a href="../canteenMainPage&id={{ canteen.canteenID }}">
+                                <span class="glyphicon glyphicon-open"></span> 进入{{ canteen.canteenName }}
+                            </a>
+                        </button>
+                    </div>
+                </div>
+
+            {% empty %}
+                <script>alert("还没有餐厅哦")</script>
+            {% endfor %}
+        {% endif %}
+
+
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.1.min.js"></script>
+<script src="../static/js/index.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

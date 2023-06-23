@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="/static/css/xk/xk.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+    <link rel="stylesheet" href="/static/css/select.css">
+</head>
+
+<body class="no-skin">
+<div class="main-container" id="main-container">
+
+    <div class="bigbox" style="background-color: transparent; margin-top: 0px; position: absolute">
+        <ul style="margin-left: 0; margin-top: 0;">
+            <li><a href="/bookLend/index"> 首页 </a></li>
+            <li><a href="/bookLend/readers"><span> 读者与借阅管理 </span> </a></li>
+            <li><a href="/bookLend/addBook"><span> 增添新书籍 </span> </a></li>
+            <li><a href="/bookLend/addReader"><span> 增添新会员 </span> </a></li>
+            <li><a href="/bookLend/addLend"><span> 增添新借阅关系 </span> </a></li>
+            <li><a href="/bookLend/readerLend"><span>未归还书籍列表</span></a></li>
+        </ul>
+    </div>
+
+
+    <div class="main-text">
+
+        <div style="clear:both"></div>
+
+        <div style="padding-top: 10px">
+            <h4 class="header smaller lighter grey"> 增添会员（读者） </h4>
+
+            <div class="widget-content navbar-example" id="pager_scroll" style="overflow: auto;">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <table class="table table-hover table-bordered table-striped" style="width: 90%">
+                        <tbody id="scoreintbody">
+                        <tr>
+                            <th>ID</th>
+                            <th><input type="text" name="ID" class="keyword"/></th>
+                        </tr>
+                        <tr>
+                            <th>名字</th>
+                            <th><input type="text" name="name" class="keyword"/></th>
+                        </tr>
+                        <tr>
+                            <th>性别</th>
+                            <th>
+                                <select name="sex">
+                                    <option value="true">男</option>
+                                    <option value="false">女</option>
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>系属</th>
+                            <th><input type="text" name="department" class="keyword"/></th>
+                        </tr>
+                        <tr>
+                            <th>年级</th>
+                            <th>
+                                <select name="grade">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </th>
+                        </tr>
+                        <input type="hidden" value="addReader" name="addReader">
+                        </tbody>
+                    </table>
+                    <button id="search" type="submit">增添读者</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</div>
+<script src="../../static/js/jquery-3.6.1.min.js"></script>
+<script src="../../static/js/book_index.js"></script>
+{% if error_msg %}
+    <script>
+        alert("{{ error_msg }}");
+    </script>
+{% endif %}
+</body>
+
+</html>

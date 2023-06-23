@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="/static/css/xk/xk.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+    <link rel="stylesheet" href="/static/css/select.css">
+</head>
+
+<body class="no-skin">
+<div class="main-container" id="main-container">
+
+    <div class="bigbox" style="background-color: transparent; margin-top: 0px; position: absolute">
+        <ul style="margin-left: 0; margin-top: 0;">
+            <li><a href="../bookLend/index"> 首页 </a></li>
+            <li><a href="../bookLend/readers"><span> 读者与借阅管理 </span> </a></li>
+            <li><a href="../bookLend/addBook"><span> 增添新书籍 </span> </a></li>
+            <li><a href="../bookLend/addReader"><span> 增添新会员 </span> </a></li>
+            <li><a href="../bookLend/addLend"><span> 增添新借阅关系 </span> </a></li>
+            <li><a href="../bookLend/readerLend"><span>未归还书籍列表</span></a></li>
+        </ul>
+    </div>
+
+
+    <div class="main-text">
+
+        <div style="clear:both"></div>
+
+        <div style="padding-top: 10px">
+            <h4 class="header smaller lighter grey"> 未归还书籍列表 </h4>
+
+            <input type="hidden" id="csrf" value="{{ csrf_token }}">
+
+            <div class="widget-content navbar-example" id="pager_scroll" style="overflow: auto; margin-top: 70px;">
+
+                <table class="table table-hover table-bordered table-striped" style="width: 90%">
+                    <tbody id="scoreintbody">
+                    <tr>
+                        <th>借阅人姓名</th>
+                        <th>借阅人ID</th>
+                        <th>书号</th>
+                        <th>书名</th>
+                        <th>数量</th>
+                        <th>借阅日期</th>
+                        <th>应归还日期</th>
+                        <th>归还确认</th>
+                    </tr>
+
+                    {% if lend_records %}
+                        {% for record in lend_records %}
+                            <tr>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="LendListID" value="{{ record.ID }}">
+                                    <td>
+                                        <a href="/bookLend/readerLendS&ID={{ record.Lend.reader.ID }}">
+                                            {{ record.Lend.reader.name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ record.Lend.reader.ID }}</td>
+                                    <td>{{ record.book.ISBN }}</td>
+                                    <td>{{ record.book.name }}</td>
+                                    <td>{{ record.num }}</td>
+                                    <td>{{ record.Lend.lend_date }}</td>
+                                    <td>{{ record.Lend.return_date }}</td>
+                                    <td>
+                                        <button>该书已归还</button>
+                                    </td>
+                                </form>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</div>
+<script src="../../static/js/jquery-3.6.1.min.js"></script>
+<script src="../../static/js/book_index.js"></script>
+{% if error_msg %}
+    <script>
+        alert("{{ error_msg }}");
+    </script>
+{% endif %}
+</body>
+
+</html>

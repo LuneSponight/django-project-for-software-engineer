@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐厅订餐网站</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/css/restaurant.css">
+    <link rel="stylesheet" href="../static/css/button.css">
+</head>
+<body>
+<div class="col-md-3" style="height: 1000px">
+    <div class="col-md-11 navigation col-lg-offset-1">
+        <div class="nav-head">
+            <span class="web-title"><h2>餐厅订餐</h2></span>
+        </div>
+        <div class="nav-content">
+            <ul class="nav nav-pills nav-stacked navigation-a">
+                <li><a href="../index/" id="index-a"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                <li><a href="../restaurant/" id="restaurant-a"><span class="glyphicon glyphicon-shopping-cart"></span>
+                    餐厅</a></li>
+                <li><a href="../order/" id="order-a"><span class="glyphicon glyphicon-tasks"></span> 我的订单</a></li>
+                <li><a href="../user/" id="user-a"><span class="glyphicon glyphicon-user"></span> 个人信息</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-md-9" style="height: 1000px">
+    <div class="panel panel-warning restaurant-content">
+        <div class="panel-heading">
+            <h3 class="panel-title"><h3 class="canteenName">{{ canteen.canteenName }}</h3></h3>
+            <h2 class="panel-title"><h4 class="canteenName">{{ canteen.descript }}</h4></h2>
+            <h2 class="panel-title"><h4 class="canteenName">{{ canteen.address }}</h4></h2>
+        </div>
+        <div class="panel-body restaurant-content-2">
+
+            <form method="post" action="">
+                {% csrf_token %}
+
+                <div class="col-md-5">
+                    <table class="table res-table1">
+                        <tbody>
+                        <tr>
+                            <td>选择预定时间</td>
+                            <td>
+                                <label>
+                                    <select class="form-control order-time">
+                                        <option>请选择预定时间</option>
+                                        <option>24：00 ~ 1：00</option>
+                                        <option>1：00 ~ 2：00</option>
+                                        <option>2：00 ~ 3：00</option>
+                                        <option>3：00 ~ 4：00</option>
+                                        <option>4：00 ~ 5：00</option>
+                                        <option>5：00 ~ 6：00</option>
+                                        <option>6：00 ~ 7：00</option>
+                                        <option>7：00 ~ 8：00</option>
+                                        <option>8：00 ~ 9：00</option>
+                                        <option>9：00 ~ 10：00</option>
+                                        <option>10：00 ~ 11：00</option>
+                                        <option>11：00 ~ 12：00</option>
+                                        <option>12：00 ~ 13：00</option>
+                                        <option>13：00 ~ 14：00</option>
+                                        <option>14：00 ~ 15：00</option>
+                                        <option>15：00 ~ 16：00</option>
+                                        <option>16：00 ~ 17：00</option>
+                                        <option>17：00 ~ 18：00</option>
+                                        <option>18：00 ~ 19：00</option>
+                                        <option>19：00 ~ 20：00</option>
+                                        <option>20：00 ~ 21：00</option>
+                                        <option>21：00 ~ 22：00</option>
+                                        <option>22：00 ~ 23：00</option>
+                                        <option>23：00 ~ 24：00</option>
+                                    </select>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>预定桌号</td>
+                            <td>
+                                <select class="form-control tableOpt">
+                                    <option>请选择预定桌号</option>
+                                    {% if tables %}
+                                        {% for table in tables %}
+                                            <option value="{{ table.tableID }}">{{ table.tableLocation }}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-10 col-md-offset-1 res-cui-select">
+
+                    {% for dish in dishes %}
+
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src="../media/{{ dish.picURL }}" alt="" class="img1">
+                                    <span></span>
+
+                                    <div class="dish">{{ dish.dishName }}</div>
+                                    <div class="dish">{{ dish.dishPrice }}</div>
+                                    <button type="button" class="minus dish-num">-</button>
+                                    <div class="cal">0</div>
+                                    <button type="button" class="add dish-num">+</button>
+                                    单项：
+                                    <div class="cal">0</div>
+
+                                </div>
+                            </div>
+
+                    {% endfor %}
+
+                </div>
+                <table class="table res-table2">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <h4>
+                                <div>total: <a class="totalPrice" id="total">0</a></div>
+                            </h4>
+                        <td/>
+                        <td>
+                            <button name="submit" type="button" id="submit" class="btn btn-warning">提交订单</button>
+                            <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                        <td/>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.1.min.js"></script>
+<script src="../static/js/order.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+

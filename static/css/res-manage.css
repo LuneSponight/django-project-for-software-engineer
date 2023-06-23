@@ -1,0 +1,105 @@
+#res-manage-a{
+    background-color: #f7e1b5;
+    color: orange;
+}
+
+.touxiang{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+.user-control{
+    width: 200px;
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    /*transform: translate(-50%,-50%);*/
+    background-color: #ffffff;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+.user-control-name{
+    margin-left: 10px;
+    font-size: 16px;
+    color: orange;
+    cursor: pointer;
+}
+.logout-style{
+    color: red;
+}
+
+.res-manage-content{
+    margin-top: 2.5%;
+}
+.res-manage-content-2{
+    height: auto;
+}
+
+.res-manage-right-img1{
+    width: 160px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.nav-manage-content{
+    margin-top: 40px;
+}
+
+
+.res-cui-information{
+    height: 420px;
+    overflow: scroll;
+    margin-top: 10px;
+}
+
+.add-cuisine-btn{
+    margin-top: 30px;
+    margin-left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+
+
+
+
+
+
+
+.navigation-manage{
+    top: 15%;
+    left: -20px;
+    border-radius: 40px;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    height: 350px;
+}
+.navigation-manage li a{
+    border-radius: 10px;
+    padding: 15px 15px;
+    font-size: 15px;
+    color: #878787
+}
+.navigation-manage li a:hover{
+    color: #0b0b0b;
+}
+.nav-head{
+    height: 50px;
+    text-align: center;
+}
+
+/*!*.res-manage-content-2 .table .td{*!*/
+/*!*    width: 40px;*!*/
+/*!*}*!*/
+/*.table>tbody>tr>td, .table>tbody>tr>th{*/
+/*    vertical-align: center;*/
+/*}*/
+/*.table>tbody>tr>td{*/
+/*    width: 40px;*/
+/*}*/
+/*.res-table td{*/
+/*    width: 500px;*/
+/*}*/

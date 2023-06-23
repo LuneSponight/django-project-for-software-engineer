@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="/static/css/xk/xk.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+    <link rel="stylesheet" href="/static/css/select.css">
+    {#    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">#}
+    {#    <link rel="stylesheet" href="/static/css/demo.css">#}
+    {#    <link rel="stylesheet" href="/static/css/res-manage.css">#}
+    {#    <link rel="stylesheet" href="/static/css/res-manage-table.css">#}
+</head>
+
+<body class="no-skin">
+<div class="main-container" id="main-container">
+
+    <div class="bigbox" style="background-color: transparent; margin-top: 0px; position: absolute">
+        <ul style="margin-left: 0; margin-top: 0;">
+            <li><a href="/bookLend/index"> 首页 </a></li>
+            <li><a href="/bookLend/readers"><span> 读者与借阅管理 </span> </a></li>
+            <li><a href="/bookLend/addBook"><span> 增添新书籍 </span> </a></li>
+            <li><a href="/bookLend/addReader"><span> 增添新会员 </span> </a></li>
+            <li><a href="/bookLend/addLend"><span> 增添新借阅关系 </span> </a></li>
+            <li><a href="/bookLend/readerLend"><span>未归还书籍列表</span></a></li>
+        </ul>
+    </div>
+
+
+    <div class="main-text">
+
+        <div style="clear:both"></div>
+
+        <div style="padding-top: 10px">
+            <h4 class="header smaller lighter grey"> 借阅管理 </h4>
+
+            <div class="widget-content navbar-example" id="pager_scroll" style="overflow: auto;">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <table class="table table-hover table-bordered table-striped" style="width: 90%">
+                        <tbody id="scoreintbody">
+                        <tr>
+                            <th>借阅人ID</th>
+                            <th><input type="text" name="ID" class="keyword"/></th>
+                        </tr>
+                        <tr>
+                            <th calss="lendBookList">借阅书目ISBN以及数量</th>
+                            <th>
+                                <span class="listContent"></span>
+                                <button type="button" class="addBookList" style="margin-left: 13px;">添加项目</button>
+                            </th>
+                        </tr>
+                        <input type="hidden" value="newLend" name="newLend">
+                        </tbody>
+                    </table>
+                    <button>生成新借阅关系</button>
+                </form>
+            </div>
+
+            <input type="hidden" id="csrf" value="{{ csrf_token }}">
+
+        </div>
+    </div>
+
+
+</div>
+<script src="../../static/js/jquery-3.6.1.min.js"></script>
+<script src="../../static/js/book_index.js"></script>
+<script src="../../static/js/Lend.js"></script>
+<script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+
+{% if error_msg %}
+    <script>
+        alert("{{ error_msg }}");
+    </script>
+{% endif %}
+</body>
+
+</html>

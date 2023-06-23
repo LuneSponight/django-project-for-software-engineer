@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="/static/css/xk/xk.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+    <link rel="stylesheet" href="/static/css/select.css">
+</head>
+
+<body class="no-skin">
+<div class="main-container" id="main-container">
+
+    <div class="bigbox" style="background-color: transparent; margin-top: 0px; position: absolute">
+        <ul style="margin-left: 0; margin-top: 0;">
+            <li><a href="/bookLend/index"> 首页 </a></li>
+            <li><a href="/bookLend/readers"><span> 读者与借阅管理 </span> </a></li>
+            <li><a href="/bookLend/addBook"><span> 增添新书籍 </span> </a></li>
+            <li><a href="/bookLend/addReader"><span> 增添新会员 </span> </a></li>
+            <li><a href="/bookLend/addLend"><span> 增添新借阅关系 </span> </a></li>
+            <li><a href="/bookLend/readerLend"><span>未归还书籍列表</span></a></li>
+        </ul>
+    </div>
+
+
+    <div class="main-text">
+
+        <div style="clear:both"></div>
+
+        <div style="padding-top: 10px">
+            <h4 class="header smaller lighter grey"> 查找读者 </h4>
+
+            <div class="widget-content navbar-example" id="pager_scroll" style="overflow: auto;">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <table class="table table-hover table-bordered table-striped" style="width: 90%">
+                        <tbody id="scoreintbody">
+                        <tr>
+                            <th>证号</th>
+                            <th><input type="text" name="ID" class="keyword"/></th>
+                        </tr>
+                        <tr>
+                            <th>姓名</th>
+                            <th><input type="text" name="name" class="keyword"/></th>
+                        </tr>
+                        <tr>
+                            <th>性别</th>
+                            <th>
+                                <select name="sex">
+                                    <option value="true">男</option>
+                                    <option value="false">女</option>
+                                    <option value="any">任意</option>
+                                </select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>系名</th>
+                            <th><input type="text" name="department" class="keyword"/></th>
+                        </tr>
+                        <tr>
+                            <th>年级</th>
+                            <th>
+                                <select name="grade">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option value="any">任意</option>
+                                </select>
+                            </th>
+                        </tr>
+                        <input type="hidden" value="search" name="search">
+                        </tbody>
+                    </table>
+                    按关键词查找：
+                    <button style="width: 5%; margin-left: 30px" id="search" type="submit">搜索</button>
+                </form>
+            </div>
+
+            <input type="hidden" id="csrf" value="{{ csrf_token }}">
+
+            <div class="widget-content navbar-example" id="pager_scroll" style="overflow: auto; margin-top: 70px;">
+
+                <table class="table table-hover table-bordered table-striped" style="width: 90%">
+                    <tbody id="scoreintbody">
+                    <tr>
+                        <th>证号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>系名</th>
+                        <th>年级</th>
+                        <th>是否借阅中</th>
+                        <th>借阅许可</th>
+                        <th>借阅详情</th>
+                        <th>管理</th>
+                    </tr>
+
+                    {% if readers %}
+                        {% for reader in readers %}
+                            <tr>
+                                <td>
+                                    <span class="ID">
+                                        <a href="/bookLend/changeInfo_reader&ID={{ reader.ID }}">{{ reader.ID }}</a>
+                                    </span>
+                                </td>
+                                <td>{{ reader.name }}</td>
+                                <td>{{ reader.sex }}</td>
+                                <td>{{ reader.department }}</td>
+                                <td>{{ reader.grade }}</td>
+                                <td>{{ reader.is_lend }}</td>
+                                <td>{{ reader.lend_permission }}</td>
+                                <td><a href="/bookLend/readerLendS&ID={{ reader.ID }}">查看详情</a></td>
+                                <td>
+                                    <button type="button" class="deleteReader">删除该读者</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</div>
+<script src="../../static/js/jquery-3.6.1.min.js"></script>
+<script src="../../static/js/readers_index.js"></script>
+{% if error_msg %}
+    <script>
+        alert("{{ error_msg }}");
+    </script>
+{% endif %}
+</body>
+
+</html>

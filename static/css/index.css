@@ -1,0 +1,82 @@
+#index-a{
+    background-color: #f7e1b5;
+    color: orange;
+}
+.search-box{
+    /* 绝对定位 水平垂直居中 */
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #ffffff;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+.search-txt{
+    border:none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #000000;
+    font-size: 16px;
+    line-height: 50px;
+    width: 400px;
+}
+.search-btn{
+    float: right;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: white;
+    background-color: orange;
+    /* 弹性布局 水平垂直居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* 动画过渡 */
+    transition: 0.4s;
+    border-color: orange;
+}
+
+.touxiang{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+.user-control{
+    width: 200px;
+    position: absolute;
+    top: 2.5%;
+    right: 5%;
+    /*transform: translate(-50%,-50%);*/
+    background-color: #ffffff;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+.user-control-name{
+    margin-left: 10px;
+    font-size: 16px;
+    color: orange;
+    cursor: pointer;
+}
+.logout-style{
+    color: red;
+}
+
+
+.index-content{
+    background-color: #ffffff;
+    padding-top: 30px;
+}
+
+.res-cover{
+    text-align: center;
+}

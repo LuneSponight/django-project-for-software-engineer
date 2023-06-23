@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐厅订餐网站</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/css/res-order.css">
+</head>
+<body>
+<div class="col-md-3" style="height: 1000px">
+    <div class="col-md-11 navigation col-lg-offset-1">
+        <div class="nav-head">
+            <span class="web-title"><h2>餐厅订餐</h2></span>
+        </div>
+        <div class="nav-content">
+            <ul class="nav nav-pills nav-stacked navigation-a">
+                <li><a href="../index_canteen/" id="res-manage-a"><span class="glyphicon glyphicon-fire"></span> 餐厅管理</a>
+                </li>
+                <li><a href="../order_canteen/" id="res-order-a"><span class="glyphicon glyphicon-th"></span>
+                    当前订单</a></li>
+                <li><a href="../changeInfo_canteen/" id="res-information-a"><span
+                        class="glyphicon glyphicon-folder-close"></span> 餐厅信息</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-md-9" style="height:auto">
+    <div class="col-md-10 col-md-offset-1 order-area">
+        {% for order in orders %}
+            <div class="col-md-10 col-md-offset-1 order-form">
+                <div class="order-form-information col-md-11">
+
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td class="order-form-information-head">订单编号</td>
+                            <td class="orderID">{{ order.orderID }}</td>
+                        </tr>
+                        <tr>
+                            <td class="order-form-information-head">预定人</td>
+                            <td>{{ order.customerName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="order-form-information-head">预定时间</td>
+                            <td>{{ order.time }}</td>
+                        </tr>
+                        <tr>
+                            <td class="order-form-information-head">预定菜品</td>
+                            <td>{{ order.dishList }}</td>
+                        </tr>
+                        <tr>
+                            <td class="order-form-information-head">预定桌</td>
+                            <td>{{ order.table }}</td>
+                        </tr>
+                        <tr>
+                            <td class="order-form-information-head">总价</td>
+                            <td>{{ order.totalPrice }}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                                    <button type="button" class="btn btn-warning finishOrder">完成订单</button>
+                                </form>
+                            </td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="../static/js/jquery-3.6.1.min.js"></script>
+<script src="../static/js/order_canteen.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

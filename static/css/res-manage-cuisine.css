@@ -1,0 +1,17 @@
+#res-manage-cuisine-a{
+    background-color: #f7e1b5;
+    color: orange;
+}
+
+
+.res-cui-information{
+    height: 420px;
+    overflow: scroll;
+    margin-top: 10px;
+}
+
+.add-cuisine-btn{
+    margin-top: 30px;
+    margin-left: 50%;
+    transform: translate(-50%,-50%);
+}

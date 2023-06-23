@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐厅订餐网站</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/css/user.css">
+</head>
+<body>
+<div class="col-md-3" style="height: 1000px">
+    <div class="col-md-11 navigation col-lg-offset-1">
+        <div class="nav-head">
+            <span class="web-title"><h2>餐厅订餐</h2></span>
+        </div>
+        <div class="nav-content">
+            <ul class="nav nav-pills nav-stacked navigation-a">
+                <li><a href="../index/" id="index-a"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                <li><a href="../restaurant/" id="restaurant-a"><span class="glyphicon glyphicon-shopping-cart"></span>
+                    餐厅</a></li>
+                <li><a href="../order/" id="order-a"><span class="glyphicon glyphicon-tasks"></span> 我的订单</a></li>
+                <li><a href="../changeInfo/" id="user-a"><span class="glyphicon glyphicon-user"></span> 个人信息</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-md-9" style="height: 1000px">
+    <div class="col-md-10 col-md-offset-1 user-information">
+        <div class="col-md-10">
+            <table class="table">
+                <caption><h2>个人信息</h2></caption>
+                <tbody>
+                <tr>
+                    <td>用户名</td>
+                    <td>{{ user.nickName }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>账号</td>
+                    <td  class="user-id">{{ user.userID }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>个人描述</td>
+                    <td>{{ user.descript }}</td>
+                    <td></td>
+                </tr>
+                <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                {% if message %}
+                    <div>{{ message }}</div>
+                {% endif %}
+                <tr>
+                    <td>
+                        <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">
+                            修改密码
+                        </button>
+                        <!-- 弹出修改界面） -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <!-- 提交信息 -->
+
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="old-password" class="control-label">输入旧密码： </label>
+                                                <input type="password" class="form-control" id="old-password"
+                                                       name="old-password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new-password" class="control-label">输入新密码： </label>
+                                                <input type="password" class="form-control" id="new-password"
+                                                       name="new-password">
+                                            </div>
+                                            <div class="text-right">
+                                                <span id="returnMessage" class="glyphicon"></span>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-warning">提交更改</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal2">
+                            修改个人信息
+                        </button>
+                        <!-- 弹出修改界面） -->
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <!-- 提交信息 -->
+
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="nickName" class="control-label">用户名：</label>
+                                                <input type="text" class="form-control" id="nickName" name="nickName">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descript" class="control-label">个人描述： </label>
+                                                <input type="text" class="form-control" id="descript" name="descript">
+                                            </div>
+                                            <div class="text-right">
+                                                <span id="returnMessage" class="glyphicon"></span>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-warning">提交更改</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal3">
+                            账号注销
+                        </button>
+                        <!-- 弹出修改界面） -->
+                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">账号注销</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <!-- 提交信息 -->
+
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                                            <div class="form-group">
+                                                <span>确认注销账号吗？</span><br>
+                                                <span>此操作会删除您的账号数据，此后使用本网站您将需要重新注册</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <span id="returnMessage" class="glyphicon"></span>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    关闭
+                                                </button>
+                                                <button type="button" class="btn btn-danger deleteAccount" name="deleteAccount">
+                                                    确认注销
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="../static/js/changeInfo.js"></script>
+<script src="../static/js/user.js"></script>
+<script src="../static/js/jquery-3.6.1.min.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+{% if error_msg %}
+    <script>
+        alert("{{ error_msg }}");
+    </script>
+{% endif %}
+</body>
+</html>

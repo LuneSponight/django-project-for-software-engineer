@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐厅订餐网站</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/demo.css">
+    <link rel="stylesheet" href="../static/css/res-manage.css">
+    <link rel="stylesheet" href="../static/css/res-manage-table.css">
+</head>
+<body>
+<div class="col-md-3" style="height: 1000px">
+    <div class="col-md-11 navigation col-lg-offset-1">
+        <div class="nav-head">
+            <span class="web-title"><h2>餐厅订餐</h2></span>
+        </div>
+        <div class="nav-content">
+            <ul class="nav nav-pills nav-stacked navigation-a">
+                <li><a href="../index_canteen/" id="res-manage-a"><span class="glyphicon glyphicon-fire"></span>
+                    餐厅管理</a></li>
+                <li><a href="../order_canteen/" id="res-order-a"><span class="glyphicon glyphicon-th"></span> 当前订单</a>
+                </li>
+                <li><a href="../changeInfo_canteen/" id="res-information-a"><span
+                        class="glyphicon glyphicon-folder-close"></span> 餐厅信息</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-9" style="height: 1000px">
+    <div class="panel panel-warning res-manage-content">
+        <div class="panel-heading">
+            <h3 class="panel-title"><h4>餐厅管理</h4></h3>
+        </div>
+        <div class="panel-body res-manage-content-2">
+            <div class="col-md-10 col-md-offset-1">
+                <table class="table">
+                    <caption style="text-align: center"><h3>餐桌信息</h3></caption>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>餐桌位置</th>
+                        <th>最大容纳人数</th>
+                        <th>餐桌价格（元）</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for table in tables %}
+                        <tr>
+                            <th><button class="minusTable">-</button></th>
+
+                            <th class="tableInfo">{{ table.tableLocation }}</th>
+                            <th class="tableInfo">{{ table.capacity }}</th>
+                            <th class="tableInfo">{{ table.tablePrice }}</th>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal7">
+                                增加桌子
+                            </button>
+                            <!-- 弹出修改界面） -->
+                            <div class="modal fade" id="myModal7" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">增加桌子</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <!-- 提交信息 -->
+
+                                            <form method="post" action="">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="tableLocation"
+                                                           class="control-label">餐桌位置： </label>
+                                                    <input type="text" class="form-control  add-tableLocation" id="tableLocation"
+                                                           name="tableLocation">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="capacity"
+                                                           class="control-label">餐桌最大容纳人数： </label>
+                                                    <input type="text" class="form-control  add-tableCapacity" id="capacity"
+                                                           name="capacity">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tablePrice"
+                                                           class="control-label">餐桌价格（元）： </label>
+                                                    <input type="text" class="form-control  add-tablePrice" id="tablePrice"
+                                                           name="tablePrice">
+                                                </div>
+                                                <div class="text-right">
+                                                    <span id="returnMessage" class="glyphicon"></span>
+                                                    <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">关闭
+                                                    </button>
+                                                    <button type="button" class="addTable btn btn-warning" onclick="addTable()">确认增加
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="col-md-10 col-md-offset-1" style="text-align: center"><h4>菜品信息</h4></div>
+            <div class="col-md-10 col-md-offset-1 res-cui-information">
+                {% for dish in dishes %}
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src="/media/{{ dish.picURL }}" alt="" class="img1 dishInfo">
+                            <table class="table">
+                                <tr>
+                                    <td>菜品名</td>
+                                    <td class="dishInfo">{{ dish.dishName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>菜品价格</td>
+                                    <td class="dishInfo">{{ dish.dishPrice }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="button" class="btn btn-danger minusDish">删除菜品</button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <button class="btn btn-warning btn-lg add-cuisine-btn" data-toggle="modal" data-target="#myModal5">
+                增加菜品
+            </button>
+            <!-- 弹出修改界面） -->
+            <div class="modal fade" id="myModal5" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">增加菜品</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <!-- 提交信息 -->
+
+                            <form method="post" action="" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="dishName" class="control-label">菜品名：</label>
+                                    <input type="text" class="form-control add-dishName" id="dishName" name="dishName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dishPrice" class="control-label">菜品价格： </label>
+                                    <input type="number" class="form-control add-dishPrice" id="dishPrice" name="dishPrice">
+                                </div>
+                                <div class="form-group">
+                                    {# <label for="picURL" class="control-label">菜品描述： </label>#}
+                                    {# <input type="password" class="form-control" id="picURL" name="picURL">#}
+                                    <label class="sr-only" for="picURL">文件输入</label>
+                                    <input type="file" class="add-picURL" id="picURL" name="picURL">
+                                </div>
+                                <div class="text-right">
+                                    <span id="returnMessage" class="glyphicon"></span>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="submit" class="addDish btn btn-warning" onclick="addDish()">确认增加</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{#    <div class="col-md-2" style="height: 1000px">#}
+{#        <div class="col-md-11 navigation-manage col-lg-offset-1">#}
+{#            <div class="nav-head">#}
+{#                <img src="../static/img/res-manage-rightNav.png" class="res-manage-right-img1" alt="">#}
+{#            </div>#}
+{#           <div class="nav-content nav-manage-content">#}
+{#               <ul class="nav nav-pills nav-stacked navigation-a">#}
+{#                   <li><a href="../res-manage/" id="res-manage-table-a"><span class="glyphicon glyphicon-fire"></span> 餐桌管理</a></li>#}
+{#                   <li><a href="../res-manage-cuisine/" id="res-manage-cuisine-a"><span class="glyphicon glyphicon-th"></span> 菜品管理</a></li>#}
+{#                   <li><a href="../res-manage-information/" id="res-manage-information-a"><span class="glyphicon glyphicon-folder-close"></span> 餐厅信息管理</a></li>#}
+{#               </ul>#}
+{#           </div>#}
+{#        </div>#}
+{#    </div>#}
+
+<div class="user-control">
+    <img src="../static/img/touxiang.png" class="touxiang" alt="">
+    <div class="dropdown">
+        <div class="dropdown-toggle user-control-name" data-toggle="dropdown">
+            <div class="canteenName-right-top">{{ canteenName }}</div>
+            <b class="caret"></b>
+        </div>
+        <ul class="dropdown-menu">
+            <li><a href="/logout">切换账号</a></li>
+            <li class="divider"></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-off logout-style"></span> 退出登录</a></li>
+        </ul>
+    </div>
+</div>
+<input type="hidden" id="csrf" value="{{ csrf_token }}">
+
+<script src="../static/js/jquery-3.6.1.min.js"></script>
+<script src="../static/js/index_canteen.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+{% if error_msg %}
+    <script>
+        alert("{{ error_msg }}");
+    </script>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+.side_a {
+    display: block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-size: 14px;
+    color: #fff;
+    padding-left: 30px;
+    text-decoration: none;
+    text-indent: 2em;
+
+
+    /*    让文字居中  文字行高等于盒子高度即可实现*/
+
+}
+
+/*  2、鼠标经过链接 变换背景颜色 */
+.side_a:hover {
+    background-color: #ffffff;
+}

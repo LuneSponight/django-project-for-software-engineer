@@ -1,0 +1,21 @@
+.dish-num{
+    background-color: #ff0000; /* Green */
+    border: none;
+    color: white;
+    padding: 3px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.dish-num:hover{
+    cursor: pointer;
+}
+
+.cal{
+    display: inline-block;
+}

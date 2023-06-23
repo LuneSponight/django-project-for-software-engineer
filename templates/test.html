@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <thead>
+        <tr>
+            <td>Name</td><td>Descript</td><td>Price</td><td>-</td><td>Sum</td><td>+</td><td>Total</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="dish">青椒肉丝</td>
+            <td class="dish">酸甜口</td>
+            <td class="dish">7</td>
+            <td><button class="minus">-</button></td>
+            <td  class="cal">0</td>
+            <td><button class="add">+</button></td>
+            <td class="cal">0</td>
+        </tr>
+        <tr>
+            <td class="dish">紫菜蛋花汤</td>
+            <td class="dish">汤品</td>
+            <td class="dish">2</td>
+            <td><button class="minus">-</button></td>
+            <td class="cal">0</td>
+            <td><button class="add">+</button></td>
+            <td class="cal">0</td>
+        </tr>
+        <tr>
+            <td class="dish">米饭</td>
+            <td class="dish">主食</td>
+            <td class="dish">1</td>
+            <td><button class="minus">-</button></td>
+            <td class="cal">0</td>
+            <td><button class="add">+</button></td>
+            <td class="cal">0</td>
+        </tr>
+        </tbody>
+    </table>
+<div>total: <a id="total">0</a></div>
+<button id="submit">SUBMIT</button><input type="hidden" id="csrf" value="{{ csrf_token }}">
+<script type="text/javascript" src="../static/js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="../static/js/order.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+#res-manage-information-a{
+    background-color: #f7e1b5;
+    color: orange;
+}
+
+.change-resInformation-btn{
+    margin-top: 30px;
+    margin-left: 50%;
+    transform: translate(-50%,-50%);
+}

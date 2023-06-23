@@ -1,0 +1,19 @@
+#restaurant-a{
+    background-color: #f7e1b5;
+    color: orange;
+}
+.restaurant-content{
+    margin-top: 2.5%;
+}
+.restaurant-content-2{
+    height: 750px;
+}
+
+.res-table2{
+    margin-left: 30%;
+}
+
+.res-cui-select{
+    height: 420px;
+    overflow: scroll;
+}
